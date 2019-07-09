@@ -75,9 +75,7 @@ protractorUtil.forEachBrowser = function(action) {
   try {
     if (global.screenshotBrowsers && Object.keys(global.screenshotBrowsers).length > 0) {
       _.forOwn(global.screenshotBrowsers, function(instance, name) {
-        instance.getCapabilities().then(function(capabilities) {
-          action(instance, name + ' [' + capabilities.get('browserName') + ']', protractorUtil.newLongRunningOperationCounter());
-        }).catch(catchError);
+        action(instance, name, protractorUtil.newLongRunningOperationCounter());
       });
     } else {
       global.browser.getCapabilities().then(function(capabilities) {
